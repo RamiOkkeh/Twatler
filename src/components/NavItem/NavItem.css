@@ -1,0 +1,26 @@
+.itemsCon {
+  /* background-color: blueviolet; */
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  transition: 1s;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.itemsCon:hover {
+  background-color: rgb(232, 245, 254);
+}
+
+.icons {
+  /* background-color: cadetblue; */
+  width: 50px;
+  height: 50px;
+  background-size: 100% 100%;
+}
+
+.itemsText {
+  /* background-color: crimson; */
+  font-size: 25px;
+}
