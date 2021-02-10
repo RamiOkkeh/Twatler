@@ -9,6 +9,10 @@ function App() {
       <Nav />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/Home" component={Home} />
+        <Route path="/Explore" component={Home} />
+        <Route path="/Bookmarks" component={Home} />
+        <Route path="/Profile" component={Home} />
       </Switch>
     </Router>
   );
