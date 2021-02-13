@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { Link, useLocation } from "react-router-dom";
+import { Switch, Route, Link, useLocation } from "react-router-dom";
 
 var tweetNum = 0,
   username = "Username",
@@ -8,6 +8,19 @@ var tweetNum = 0,
   following = 1,
   followers = 0,
   followStatus = "self";
+
+function Test() {
+  return <div>main</div>;
+}
+function Test1() {
+  return <div>askld</div>;
+}
+function Test2() {
+  return <div>dsvfrevf</div>;
+}
+function Test3() {
+  return <div>serfdr</div>;
+}
 
 function Profile() {
   const loc = useLocation().pathname;
@@ -62,6 +75,14 @@ function Profile() {
         >
           Likes
         </Link>
+      </div>
+      <div>
+        <Switch>
+          <Route path="/Profile" exact component={Test} />
+          <Route path="/Profile/Replies" component={Test1} />
+          <Route path="/Profile/Media" component={Test2} />
+          <Route path="/Profile/Likes" component={Test3} />
+        </Switch>
       </div>
     </div>
   );

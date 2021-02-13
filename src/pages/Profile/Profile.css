@@ -98,9 +98,14 @@
 }
 
 .following * {
+  text-decoration: none;
   margin-right: 10px;
   font-size: 15px;
   color: grey;
+}
+
+.following *:hover {
+  text-decoration: underline;
 }
 
 .taps {

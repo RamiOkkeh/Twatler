@@ -14,6 +14,11 @@
   background-color: rgb(232, 245, 254);
 }
 
+.itemsCon:hover * {
+  filter: invert(49%) sepia(93%) saturate(1916%) hue-rotate(176deg)
+    brightness(99%) contrast(92%);
+}
+
 .icons {
   /* background-color: cadetblue; */
   width: 50px;
