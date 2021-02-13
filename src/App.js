@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path="/Home" component={Home} />
         <Route path="/Explore" component={Home} />
         <Route path="/Bookmarks" component={Home} />
-        <Route path="/Profile" component={Home} />
+        <Route path="/Profile" component={Profile} />
       </Switch>
     </Router>
   );
