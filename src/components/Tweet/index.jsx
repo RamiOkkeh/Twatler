@@ -31,10 +31,7 @@ function Tweet() {
         <div className="contentDiv">
           <div className="tweet">{tweetMsg}</div>
           {media ? (
-            <div
-              className="mediaCon"
-              style={{ backgroundImage: `url("${media}")` }}
-            ></div>
+            <img className="mediaCon" src={media} alt="media not found"></img>
           ) : (
             ""
           )}
