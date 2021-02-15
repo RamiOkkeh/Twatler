@@ -15,8 +15,8 @@ function Home() {
         <textarea
           name="tweetBox"
           className="tweetTextBox"
-          autofocus
-          maxlength="280"
+          autoFocus
+          maxLength="280"
           placeholder="What's happening"
         ></textarea>
         <div className="tweetOptions">

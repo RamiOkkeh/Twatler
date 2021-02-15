@@ -1,5 +1,6 @@
 import "./Profile.css";
 import { Switch, Route, Link, useLocation } from "react-router-dom";
+import Tweet from "../../components/Tweet";
 
 var tweetNum = 0,
   username = "Username",
@@ -27,6 +28,11 @@ function Profile() {
   return (
     <div className="homeCon">
       <div className="profileTitle">
+        <Link to="">
+          <div className="backCon">
+            <button className="back"></button>
+          </div>
+        </Link>
         <span className="usernameTitle">{username}</span>
         <span className="tweetsTitle">{tweetNum} tweets</span>
       </div>
@@ -76,6 +82,7 @@ function Profile() {
           Likes
         </Link>
       </div>
+      <Tweet />
       <div>
         <Switch>
           <Route path="/Profile" exact component={Test} />

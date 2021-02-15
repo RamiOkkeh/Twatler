@@ -8,6 +8,31 @@
   align-items: center;
 }
 
+.backCon {
+  margin-left: 12px;
+  padding: 3px;
+  border-radius: 50px;
+}
+
+.backCon:hover {
+  background-color: rgb(232, 245, 254);
+}
+
+.back {
+  background-image: url("https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png");
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-position-y: -2px;
+  transform: rotate(180deg);
+  outline: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  filter: invert(49%) sepia(93%) saturate(1916%) hue-rotate(176deg)
+    brightness(99%) contrast(92%);
+  cursor: pointer;
+}
+
 .usernameTitle {
   /* background-color: teal; */
   font-size: 19px;

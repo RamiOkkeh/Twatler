@@ -1,0 +1,113 @@
+.tweetCon {
+  /* background-color: aqua; */
+  width: 100%;
+  min-height: 90px;
+  display: flex;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.userPic {
+  background-color: rgb(204, 214, 221);
+  background-size: 100% 100%;
+  border-radius: 100px;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+.contentCon {
+  /* background-color: brown; */
+  width: 90%;
+  height: auto;
+  padding: 5px;
+}
+
+.usernameCon {
+  /* background-color: burlywood; */
+}
+
+.name {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0px 5px;
+}
+
+.grey {
+  font-size: 14px;
+  color: grey;
+  margin: 5px;
+}
+
+.contentDiv {
+  /* background-color: cadetblue; */
+  padding-left: 5px;
+  height: 75%;
+}
+
+.mediaCon {
+}
+
+.reactionsCon {
+  /* background-color: chartreuse; */
+  display: flex;
+  align-items: flex-end;
+  width: auto;
+  height: 40px;
+}
+
+.flex {
+  /* background-color: crimson; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70px;
+  margin: 2px 10%;
+}
+
+.reply,
+.heart,
+.bookmark,
+.unbookmark {
+  /* background-color: cornflowerblue; */
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  background-size: 80% 80%;
+}
+
+.reply {
+  background-image: url("https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_comment-512.png");
+  background-size: 60% 60%;
+  background-position-y: 5px;
+}
+
+.reply:hover {
+  background-color: rgb(184, 255, 184);
+}
+
+.heart {
+  background-image: url("https://icons-for-free.com/iconfiles/png/512/heart-131965017458786724.png");
+  background-position-y: 4px;
+}
+
+.heart:hover {
+  background-color: rgb(255, 184, 184);
+}
+
+.bookmark {
+  background-image: url("https://static.thenounproject.com/png/50608-200.png");
+}
+
+.bookmark:hover {
+  background-color: rgb(184, 221, 255);
+}
+
+.unbookmark {
+  background-image: url("https://static.thenounproject.com/png/50608-200.png");
+}
+
+.unbookmark:hover {
+  background-color: rgb(184, 221, 255);
+}
