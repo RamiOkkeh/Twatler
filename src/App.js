@@ -1,26 +1,12 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Nav from "./components/Nav";
-import Home from "./pages/Home";
-import Explore from "./pages/Explore";
-import Bookmarks from "./pages/Bookmarks";
-import Profile from "./pages/Profile";
-import Comments from "./pages/Comments";
+import { useState } from "react";
+import Logged from "./pages/Logged";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 
 function App() {
-  return (
-    <Router>
-      <Nav />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Home" component={Home} />
-        <Route path="/Explore" component={Explore} />
-        <Route path="/Bookmarks" component={Bookmarks} />
-        <Route path="/Profile" component={Profile} />
-        <Route path="/Comments" component={Comments} />
-      </Switch>
-    </Router>
-  );
+  var [user, setUser] = useState(null);
+  return <div>{user ? <Logged></Logged> : <Signup></Signup>}</div>;
 }
 
 export default App;

@@ -1,0 +1,10 @@
+.signupCon {
+  background-color: aqua;
+  width: 100vw;
+  height: 100vh;
+}
+.signCover {
+  background-image: url("https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png");
+  width: 50%;
+  height: 100%;
+}

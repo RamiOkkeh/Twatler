@@ -82,7 +82,6 @@ function Profile() {
           Likes
         </Link>
       </div>
-      <Tweet />
       <div>
         <Switch>
           <Route path="/Profile" exact component={Test} />
