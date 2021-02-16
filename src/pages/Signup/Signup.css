@@ -2,9 +2,36 @@
   background-color: aqua;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
+
 .signCover {
   background-image: url("https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png");
-  width: 50%;
+  width: 55%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  filter: brightness(500%);
+  width: 60ex;
+  height: 60ex;
+}
+
+.formCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 45%;
+}
+
+.formCon * {
+  margin: 10px;
+}
+
+.form {
 }
