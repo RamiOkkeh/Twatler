@@ -19,10 +19,11 @@ function Signin({ setUser }) {
     })
       .then((res) => res.text())
       .then((data) => {
-        if (data === "incorrect password" || data === "email does not exist") {
+        if (data === "Incorrect password" || data === "Email does not exist") {
           $("#notify").html(data);
         } else {
           setUser(JSON.parse(data));
+          sessionStorage.setItem("user", data);
         }
       });
   };

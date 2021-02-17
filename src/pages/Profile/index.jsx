@@ -2,14 +2,6 @@ import "./Profile.css";
 import { Switch, Route, Link, useLocation } from "react-router-dom";
 import Tweet from "../../components/Tweet";
 
-var tweetNum = 0,
-  username = "Username",
-  image = null,
-  join = new Date(),
-  following = 1,
-  followers = 0,
-  followStatus = "self";
-
 function Test() {
   return <div>main</div>;
 }
@@ -23,8 +15,26 @@ function Test3() {
   return <div>serfdr</div>;
 }
 
-function Profile() {
+function Profile({ user }) {
   const loc = useLocation().pathname;
+  let {
+    id,
+    nickName,
+    userName,
+    cover,
+    profile,
+    tweets,
+    join,
+    following,
+    followers,
+  } = user;
+  let session = JSON.parse(sessionStorage.getItem("user")),
+    followStatus =
+      session["userName"] === userName
+        ? "self"
+        : session["following"].includes(id["$oid"])
+        ? true
+        : false;
   return (
     <div className="homeCon">
       <div className="profileTitle">
@@ -33,29 +43,40 @@ function Profile() {
             <button className="back"></button>
           </div>
         </Link>
-        <span className="usernameTitle">{username}</span>
-        <span className="tweetsTitle">{tweetNum} tweets</span>
+        <span className="usernameTitle">{nickName}</span>
+        <span className="tweetsTitle">{tweets.length} tweets</span>
       </div>
       <div className="profileCon">
         <div
           className="userBG"
           style={{
-            backgroundImage: image ? `url('${image}')` : "",
+            backgroundImage: cover ? `url('${cover}')` : "",
           }}
         ></div>
         <div className="profileInfoCon">
           <div className="profilePicCon">
-            <div className="profilePic"></div>
+            <div
+              className="profilePic"
+              style={{
+                backgroundImage: profile
+                  ? `url('${profile}')`
+                  : `url("https://static.thenounproject.com/png/630740-200.png")`,
+              }}
+            ></div>
             <button className="follow">
-              {followStatus === "self" ? "Set up profile" : followStatus}
+              {followStatus === "self"
+                ? "Set up profile"
+                : followStatus
+                ? "Unfollow"
+                : "Follow"}
             </button>
           </div>
-          <div className="username">{username}</div>
-          <div className="userAtName">@{username}</div>
-          <div className="joined">Joined {join.toLocaleDateString()}</div>
+          <div className="username">{nickName}</div>
+          <div className="userAtName">@{userName}</div>
+          <div className="joined">Joined {join}</div>
           <div className="following">
-            <Link to="home">{following} Following</Link>
-            <Link to="">{followers} Followers</Link>
+            <Link to="home">{following.length} Following</Link>
+            <Link to="">{followers.length} Followers</Link>
           </div>
         </div>
       </div>

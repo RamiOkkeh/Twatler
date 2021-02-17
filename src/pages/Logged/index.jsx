@@ -13,7 +13,7 @@ import Comments from "../Comments";
 import Signup from "../Signup";
 import Signin from "../Signin";
 
-function Logged() {
+function Logged({ user }) {
   return (
     <Router>
       <Nav />
@@ -22,7 +22,7 @@ function Logged() {
         <Route path="/Home" component={Home} />
         <Route path="/Explore" component={Explore} />
         <Route path="/Bookmarks" component={Bookmarks} />
-        <Route path="/Profile" component={Profile} />
+        <Route path="/Profile" render={() => <Profile user={user} />} />
         <Route path="/Comments" component={Comments} />
         <Route path="/Signup" component={Signup} />
         <Route path="/Signin" component={Signin} />

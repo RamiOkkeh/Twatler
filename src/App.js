@@ -11,7 +11,8 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
 function App() {
-  let [user, setUser] = useState(null);
+  let [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+
   return (
     <Router>
       <Switch>

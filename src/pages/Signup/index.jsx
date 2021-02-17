@@ -17,18 +17,19 @@ function Signup({ setUser }) {
         nickName: nickName.value,
         email: email.value,
         pass: pass.value,
-        join: new Date(),
+        join: new Date().toLocaleDateString(),
       }),
     })
       .then((res) => res.text())
       .then((data) => {
         if (
-          data === "email already in use" ||
-          data === "username already in use"
+          data === "Email already in use" ||
+          data === "Username already in use"
         ) {
           $("#notify").html(data);
         } else {
           setUser(JSON.parse(data));
+          sessionStorage.setItem("user", data);
         }
       });
   };
