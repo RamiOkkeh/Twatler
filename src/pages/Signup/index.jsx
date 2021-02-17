@@ -1,7 +1,13 @@
 import "./Signup.css";
 import $ from "jquery";
+import Signin from "../Signin";
+import { Link } from "react-router-dom";
 
 function Signup() {
+  const switchPage = () => {
+    console.log("bhsehbd");
+    return <Signin></Signin>;
+  };
   const submit = (e) => {
     console.log(e);
     e.preventDefault();
@@ -11,7 +17,6 @@ function Signup() {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         userName: userName.value,
@@ -23,7 +28,6 @@ function Signup() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // data = JSON.parse(data);
         console.log(data);
       });
   };
@@ -37,24 +41,20 @@ function Signup() {
           alt="logo"
         />
       </div>
-      <form className="formCon" id="signup">
-        <div>
-          <label name="username">Username</label>
-          <input type="text" name="username" />
-        </div>
-        <div>
-          <label name="nickname">Nickname</label>
-          <input type="text" name="nickname" />
-        </div>
-        <div>
-          <label name="email">Email</label>
-          <input type="text" name="email" />
-        </div>
-        <div>
-          <label name="password">Password</label>
-          <input type="text" name="password" />
-        </div>
-        <button onClick={submit}>Signup</button>
+      <form className="formCon" id="signup" onSubmit={submit}>
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="text" name="nickname" placeholder="Nickname" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input
+          type="Password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button className="signunin">Sign up</button>
+        <Link className="signToggle" to="/Signin">
+          Sign in
+        </Link>
       </form>
     </div>
   );

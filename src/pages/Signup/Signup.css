@@ -1,5 +1,4 @@
 .signupCon {
-  background-color: aqua;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -33,5 +32,35 @@
   margin: 10px;
 }
 
-.form {
+.formCon input {
+  width: 200px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.signToggle {
+  color: blue;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.signToggle:hover {
+  text-decoration: underline;
+}
+
+.signToggle:visited {
+  color: darkblue;
+}
+
+.signunin {
+  width: 200px;
+  height: 30px;
+  background-color: rgb(15, 154, 251);
+  border: none;
+  border-radius: 20px;
+  color: white;
 }

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Signin() {
   const submit = (e) => {
     console.log(e);
@@ -12,16 +14,13 @@ function Signin() {
           alt="logo"
         />
       </div>
-      <form className="formCon">
-        <div>
-          <label name="email">Email</label>
-          <input type="text" name="email" />
-        </div>
-        <div>
-          <label name="password">Password</label>
-          <input type="text" name="password" />
-        </div>
-        <button onClick={submit}>Login</button>
+      <form className="formCon" onSubmit={submit}>
+        <input type="text" name="email" placeholder="E-mail" required />
+        <input type="text" name="password" placeholder="Password" required />
+        <button className="signunin">Sign in</button>
+        <Link className="signToggle" to="/Signup">
+          Sign up
+        </Link>
       </form>
     </div>
   );
