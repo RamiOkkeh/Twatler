@@ -1,9 +1,30 @@
 import { Link } from "react-router-dom";
+import $ from "jquery";
 
-function Signin() {
+function Signin({ setUser }) {
   const submit = (e) => {
-    console.log(e);
     e.preventDefault();
+    let [email, pass] = $("input").serializeArray();
+    console.log(email, pass);
+    fetch("http://localhost:8000/signin", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        pass: pass.value,
+      }),
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        if (data === "incorrect password" || data === "email does not exist") {
+          $("#notify").html(data);
+        } else {
+          setUser(JSON.parse(data));
+        }
+      });
   };
   return (
     <div className="signupCon">
@@ -15,8 +36,14 @@ function Signin() {
         />
       </div>
       <form className="formCon" onSubmit={submit}>
-        <input type="text" name="email" placeholder="E-mail" required />
-        <input type="text" name="password" placeholder="Password" required />
+        <div id="notify"></div>
+        <input type="email" name="email" placeholder="E-mail" required />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
         <button className="signunin">Sign in</button>
         <Link className="signToggle" to="/Signup">
           Sign up

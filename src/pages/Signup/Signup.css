@@ -60,7 +60,16 @@
   width: 200px;
   height: 30px;
   background-color: rgb(15, 154, 251);
+  outline: none;
   border: none;
   border-radius: 20px;
   color: white;
+}
+
+.signunin:hover {
+  background-color: rgb(18, 120, 194);
+}
+
+.signunin:active {
+  background-color: rgb(16, 93, 148);
 }

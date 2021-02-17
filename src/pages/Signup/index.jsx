@@ -1,11 +1,9 @@
 import "./Signup.css";
 import $ from "jquery";
-import Signin from "../Signin";
 import { Link } from "react-router-dom";
 
 function Signup({ setUser }) {
   const submit = (e) => {
-    console.log(e);
     e.preventDefault();
     let [userName, nickName, email, pass] = $("input").serializeArray();
     fetch("http://localhost:8000/signup", {
