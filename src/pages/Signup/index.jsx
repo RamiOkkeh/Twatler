@@ -3,11 +3,7 @@ import $ from "jquery";
 import Signin from "../Signin";
 import { Link } from "react-router-dom";
 
-function Signup() {
-  const switchPage = () => {
-    console.log("bhsehbd");
-    return <Signin></Signin>;
-  };
+function Signup({ setUser }) {
   const submit = (e) => {
     console.log(e);
     e.preventDefault();
@@ -26,9 +22,16 @@ function Signup() {
         join: new Date(),
       }),
     })
-      .then((res) => res.json())
+      .then((res) => res.text())
       .then((data) => {
-        console.log(data);
+        if (
+          data === "email already in use" ||
+          data === "username already in use"
+        ) {
+          $("#notify").html(data);
+        } else {
+          setUser(JSON.parse(data));
+        }
       });
   };
 
@@ -42,6 +45,7 @@ function Signup() {
         />
       </div>
       <form className="formCon" id="signup" onSubmit={submit}>
+        <div id="notify"></div>
         <input type="text" name="username" placeholder="Username" required />
         <input type="text" name="nickname" placeholder="Nickname" required />
         <input type="email" name="email" placeholder="Email" required />

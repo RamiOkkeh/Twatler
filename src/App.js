@@ -11,14 +11,21 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
 function App() {
-  var [user, setUser] = useState(null);
+  let [user, setUser] = useState(null);
   return (
     <Router>
       <Switch>
-        <Route path="/Signup" component={Signup} />
-        <Route path="/Signin" component={Signin} />
+        <Route path="/" exact render={() => <Logged user={user}></Logged>} />
+        <Route
+          path="/Signup"
+          render={() => <Signup setUser={setUser}></Signup>}
+        />
+        <Route
+          path="/Signin"
+          render={() => <Signin setUser={setUser}></Signin>}
+        />
       </Switch>
-      {user ? <Logged></Logged> : <Redirect to="Signup"></Redirect>}
+      {user ? <Redirect to="/" /> : <Redirect to="Signup" />}
     </Router>
   );
 }
