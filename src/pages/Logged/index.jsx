@@ -26,11 +26,15 @@ function Logged({ user }) {
         <Route
           path="/"
           exact
-          render={() => <Home user={user} tweets={tweets} />}
+          render={() => (
+            <Home user={user} tweets={tweets} setTweets={setTweets} />
+          )}
         />
         <Route
           path="/Home"
-          render={() => <Home user={user} tweets={tweets} />}
+          render={() => (
+            <Home user={user} tweets={tweets} setTweets={setTweets} />
+          )}
         />
         <Route path="/Explore" render={() => <Explore tweets={tweets} />} />
         <Route path="/Bookmarks" component={Bookmarks} />

@@ -3,7 +3,7 @@ import { useState } from "react";
 import $ from "jquery";
 import Tweet from "../../components/Tweet";
 
-function Home({ user, tweets }) {
+function Home({ user, tweets, setTweets }) {
   let visi =
       'url("https://cdn0.iconfinder.com/data/icons/octicons/1024/globe-512.png")',
     unVisi = 'url("https://image.flaticon.com/icons/png/512/51/51372.png")';
@@ -31,6 +31,12 @@ function Home({ user, tweets }) {
       .then((res) => res.json())
       .then((tweet) => {
         console.log(tweet);
+        setTweets((twets) => {
+          twets.push(tweet);
+          return tweets;
+        });
+        setMedia("");
+        $("#tweetBox").val("");
       });
   };
 

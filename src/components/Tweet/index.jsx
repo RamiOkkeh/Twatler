@@ -17,6 +17,7 @@ function Tweet({ tweet }) {
     created,
     content,
     media,
+    replies,
     replyTo,
     hearts,
   } = tweet;
