@@ -24,8 +24,8 @@ function Logged({ user }) {
         <Route path="/Bookmarks" component={Bookmarks} />
         <Route path="/Profile" render={() => <Profile user={user} />} />
         <Route path="/Comments" component={Comments} />
-        <Route path="/Signup" component={Signup} />
-        <Route path="/Signin" component={Signin} />
+        {/* <Route path="/Signup" component={Signup} />
+        <Route path="/Signin" component={Signin} /> */}
       </Switch>
     </Router>
   );

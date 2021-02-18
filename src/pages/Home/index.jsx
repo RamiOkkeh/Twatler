@@ -1,13 +1,18 @@
 import "./Home.css";
 import { useState } from "react";
 import $ from "jquery";
+import Tweet from "../../components/Tweet";
 
 function Home({ user }) {
   let visi =
       'url("https://cdn0.iconfinder.com/data/icons/octicons/1024/globe-512.png")',
     unVisi = 'url("https://image.flaticon.com/icons/png/512/51/51372.png")';
-  let [vis, setVis] = useState(true);
-  let [media, setMedia] = useState("");
+  let [vis, setVis] = useState(true),
+    [media, setMedia] = useState(""),
+    [tweets, setTweets] = useState([]);
+  fetch("http://localhost:8000/tweet")
+    .then((res) => res.json())
+    .then((twets) => setTweets(twets));
   const tweet = () => {
     let options = {
       method: "POST",
@@ -17,6 +22,8 @@ function Home({ user }) {
       },
       body: JSON.stringify({
         userName: user.userName,
+        nickName: user.nickName,
+        profile: user.profile,
         content: $("#tweetBox").val(),
         created: new Date().valueOf(),
         media: media,
@@ -83,6 +90,12 @@ function Home({ user }) {
           </button>
         </div>
       </div>
+      {tweets
+        .slice(0)
+        .reverse()
+        .map((tweet) => (
+          <Tweet tweet={tweet}></Tweet>
+        ))}
     </div>
   );
 }

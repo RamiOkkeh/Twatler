@@ -1,7 +1,7 @@
 import "./Tweet.css";
 
 function Tweet({ tweet }) {
-  var userpic = 0,
+  var profile = 0,
     userName = "rami",
     nickName = "rami",
     created = "Jan 13",
@@ -10,14 +10,24 @@ function Tweet({ tweet }) {
     replies = [{ id: 1872 }],
     hearts = 20,
     booked = true;
+  var {
+    profile,
+    userName,
+    nickName,
+    created,
+    content,
+    media,
+    replyTo,
+    hearts,
+  } = tweet;
 
   return (
     <div className="tweetCon">
       <div
         className="userPic"
         style={{
-          backgroundImage: userpic
-            ? `url("${userpic}")`
+          backgroundImage: profile
+            ? `url("${profile}")`
             : "url('https://static.thenounproject.com/png/630740-200.png')",
         }}
       ></div>
@@ -25,7 +35,7 @@ function Tweet({ tweet }) {
         <div className="usernameCon">
           <span className="name">{userName}</span>
           <span className="grey">@{nickName}</span>
-          <span className="grey">{created}</span>
+          <span className="grey">{new Date(created).toLocaleDateString()}</span>
         </div>
         <div className="contentDiv">
           <div className="tweet">{content}</div>
