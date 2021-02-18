@@ -18,8 +18,8 @@ function Logged({ user }) {
     <Router>
       <Nav />
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Home" component={Home} />
+        <Route path="/" exact render={() => <Home user={user} />} />
+        <Route path="/Home" render={() => <Home user={user} />} />
         <Route path="/Explore" component={Explore} />
         <Route path="/Bookmarks" component={Bookmarks} />
         <Route path="/Profile" render={() => <Profile user={user} />} />

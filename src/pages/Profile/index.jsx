@@ -73,7 +73,9 @@ function Profile({ user }) {
           </div>
           <div className="username">{nickName}</div>
           <div className="userAtName">@{userName}</div>
-          <div className="joined">Joined {join}</div>
+          <div className="joined">
+            Joined {new Date(join).toLocaleDateString()}
+          </div>
           <div className="following">
             <Link to="home">{following.length} Following</Link>
             <Link to="">{followers.length} Followers</Link>

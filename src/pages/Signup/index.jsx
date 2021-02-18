@@ -17,7 +17,7 @@ function Signup({ setUser }) {
         nickName: nickName.value,
         email: email.value,
         pass: pass.value,
-        join: new Date().toLocaleDateString(),
+        join: new Date().valueOf(),
       }),
     })
       .then((res) => res.text())
