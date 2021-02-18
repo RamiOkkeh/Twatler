@@ -3,16 +3,12 @@ import { useState } from "react";
 import $ from "jquery";
 import Tweet from "../../components/Tweet";
 
-function Home({ user }) {
+function Home({ user, tweets }) {
   let visi =
       'url("https://cdn0.iconfinder.com/data/icons/octicons/1024/globe-512.png")',
     unVisi = 'url("https://image.flaticon.com/icons/png/512/51/51372.png")';
   let [vis, setVis] = useState(true),
-    [media, setMedia] = useState(""),
-    [tweets, setTweets] = useState([]);
-  fetch("http://localhost:8000/tweet")
-    .then((res) => res.json())
-    .then((twets) => setTweets(twets));
+    [media, setMedia] = useState("");
   const tweet = () => {
     let options = {
       method: "POST",
@@ -93,8 +89,8 @@ function Home({ user }) {
       {tweets
         .slice(0)
         .reverse()
-        .map((tweet) => (
-          <Tweet tweet={tweet}></Tweet>
+        .map((tweet, i) => (
+          <Tweet key={i} tweet={tweet}></Tweet>
         ))}
     </div>
   );

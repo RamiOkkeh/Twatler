@@ -1,12 +1,15 @@
+import { useState } from "react";
 import Tweet from "../../components/Tweet";
 
-function Explore() {
-  var tweets = [{}];
+function Explore({ tweets }) {
   return (
     <div className="homeCon">
-      {tweets.map((tweet, i) => (
-        <Tweet key={i} data={tweet}></Tweet>
-      ))}
+      {tweets
+        .slice(0)
+        .reverse()
+        .map((tweet, i) => (
+          <Tweet key={i} tweet={tweet}></Tweet>
+        ))}
     </div>
   );
 }
