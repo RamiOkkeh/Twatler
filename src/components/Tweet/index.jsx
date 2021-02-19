@@ -1,9 +1,34 @@
+import { useState } from "react";
 import "./Tweet.css";
 
 function Tweet({ tweet }) {
-  var booked = true;
-  let { user, created, content, media, replies, replyTo, hearts } = tweet;
+  let [tweeet, setTweet] = useState(tweet);
+  let { user, created, content, media, replies, replyTo, hearts } = tweeet;
   let { userName, nickName, profile } = user;
+  let booked = true,
+    session = JSON.parse(sessionStorage.getItem("user")),
+    hearted = hearts.some((el) => el === session["userName"]);
+
+  const heart = () => {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userName,
+        _id: tweeet._id.$oid,
+        hearted: hearted,
+      }),
+    };
+    fetch("http://localhost:8000/tweet/heart", options)
+      .then((res) => res.json())
+      .then((twet) => {
+        setTweet(twet);
+      });
+  };
+
   return (
     <div className="tweetCon">
       <div
@@ -36,8 +61,11 @@ function Tweet({ tweet }) {
               <div>{replies.length}</div>
             </div>
             <div className="flex">
-              <div className="heart"></div>
-              <div>{hearts}</div>
+              <div
+                className={hearted ? "hearted" : "heart"}
+                onClick={heart}
+              ></div>
+              <div>{hearts.length}</div>
             </div>
             <div className="flex">
               <div className={booked ? "unbookmark" : "bookmark"}></div>

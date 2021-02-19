@@ -72,9 +72,10 @@
 
 .reply,
 .heart,
+.hearted,
 .bookmark,
 .unbookmark {
-  /* background-color: cornflowerblue; */
+  background-position: center;
   width: 30px;
   height: 30px;
   background-position: center;
@@ -86,20 +87,29 @@
 .reply {
   background-image: url("https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_comment-512.png");
   background-size: 60% 60%;
-  background-position-y: 5px;
 }
 
 .reply:hover {
   background-color: rgb(184, 255, 184);
 }
 
-.heart {
+.heart,
+.hearted {
   background-image: url("https://icons-for-free.com/iconfiles/png/512/heart-131965017458786724.png");
-  background-position-y: 4px;
 }
 
+.hearted {
+  filter: invert(46%) sepia(85%) saturate(6868%) hue-rotate(3deg)
+    brightness(101%) contrast(110%);
+}
+
+.hearted:hover,
 .heart:hover {
   background-color: rgb(255, 184, 184);
+}
+
+.hearted:hover {
+  filter: invert(0%);
 }
 
 .bookmark {
