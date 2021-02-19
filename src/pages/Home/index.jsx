@@ -3,7 +3,7 @@ import { useState } from "react";
 import $ from "jquery";
 import Tweet from "../../components/Tweet";
 
-function Home({ user, tweets, setTweets }) {
+function Home({ user, setUser, tweets, setTweets }) {
   let visi =
       'url("https://cdn0.iconfinder.com/data/icons/octicons/1024/globe-512.png")',
     unVisi = 'url("https://image.flaticon.com/icons/png/512/51/51372.png")';
@@ -94,7 +94,7 @@ function Home({ user, tweets, setTweets }) {
         .slice(0)
         .reverse()
         .map((tweet, i) => (
-          <Tweet key={i} tweet={tweet}></Tweet>
+          <Tweet key={i} tweet={tweet} setUser={setUser}></Tweet>
         ))}
     </div>
   );

@@ -1,11 +1,31 @@
 import Tweet from "../../components/Tweet";
+import { useState, useEffect } from "react";
 
-function Bookmarks() {
-  var tweets = [{}];
+function Bookmarks({ user, setUser }) {
+  let [tweets, setTweets] = useState([]);
+  useEffect(() => {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tweets: user["bookmarks"],
+      }),
+    };
+    fetch("http://localhost:8000/bookmarks", options)
+      .then((res) => res.json())
+      .then((twets) => {
+        setTweets(twets);
+      });
+  }, []);
   return (
     <div className="homeCon">
       {tweets.length > 0 ? (
-        tweets.map((tweet, i) => <Tweet key={i} data={tweet}></Tweet>)
+        tweets.map((tweet, i) => (
+          <Tweet key={i} tweet={tweet} setUser={setUser}></Tweet>
+        ))
       ) : (
         <div
           style={{

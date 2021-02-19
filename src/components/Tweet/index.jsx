@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./Tweet.css";
 
-function Tweet({ tweet }) {
+function Tweet({ tweet, setUser }) {
   let [tweeet, setTweet] = useState(tweet);
   let { user, created, content, media, replies, replyTo, hearts } = tweeet;
   let { userName, nickName, profile } = user;
-  let booked = true,
-    session = JSON.parse(sessionStorage.getItem("user")),
-    hearted = hearts.some((el) => el === session["userName"]);
+  let session = JSON.parse(sessionStorage.getItem("user")),
+    hearted = hearts.some((el) => el === session["userName"]),
+    booked = session.bookmarks.some((el) => el === tweeet._id.$oid);
 
   const heart = () => {
     let options = {
@@ -26,6 +26,28 @@ function Tweet({ tweet }) {
       .then((res) => res.json())
       .then((twet) => {
         setTweet(twet);
+      });
+  };
+
+  const book = () => {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userName,
+        _id: tweeet._id.$oid,
+        booked: booked,
+      }),
+    };
+    fetch("http://localhost:8000/tweet/book", options)
+      .then((res) => res.json())
+      .then((user) => {
+        console.log(user);
+        sessionStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
       });
   };
 
@@ -68,7 +90,10 @@ function Tweet({ tweet }) {
               <div>{hearts.length}</div>
             </div>
             <div className="flex">
-              <div className={booked ? "unbookmark" : "bookmark"}></div>
+              <div
+                className={booked ? "unbookmark" : "bookmark"}
+                onClick={book}
+              ></div>
             </div>
           </div>
         </div>

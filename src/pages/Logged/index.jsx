@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "../../components/Nav";
 import Home from "../Home";
 import Explore from "../Explore";
@@ -14,11 +14,13 @@ import Comments from "../Comments";
 // import Signup from "../Signup";
 // import Signin from "../Signin";
 
-function Logged({ user }) {
+function Logged({ user, setUser }) {
   let [tweets, setTweets] = useState([]);
-  fetch("http://localhost:8000/tweet")
-    .then((res) => res.json())
-    .then((twets) => setTweets(twets));
+  useEffect(() => {
+    fetch("http://localhost:8000/tweet")
+      .then((res) => res.json())
+      .then((twets) => setTweets(twets));
+  }, []);
   return (
     <Router>
       <Nav />
@@ -27,17 +29,35 @@ function Logged({ user }) {
           path="/"
           exact
           render={() => (
-            <Home user={user} tweets={tweets} setTweets={setTweets} />
+            <Home
+              user={user}
+              setUser={setUser}
+              tweets={tweets}
+              setTweets={setTweets}
+            />
           )}
         />
         <Route
           path="/Home"
           render={() => (
-            <Home user={user} tweets={tweets} setTweets={setTweets} />
+            <Home
+              user={user}
+              setUser={setUser}
+              tweets={tweets}
+              setTweets={setTweets}
+            />
           )}
         />
-        <Route path="/Explore" render={() => <Explore tweets={tweets} />} />
-        <Route path="/Bookmarks" component={Bookmarks} />
+        <Route
+          path="/Explore"
+          render={() => (
+            <Explore user={user} setUser={setUser} tweets={tweets} />
+          )}
+        />
+        <Route
+          path="/Bookmarks"
+          render={() => <Bookmarks user={user} setUser={setUser} />}
+        />
         <Route path="/Profile" render={() => <Profile user={user} />} />
         <Route path="/Comments" component={Comments} />
         {/* <Route path="/Signup" component={Signup} />

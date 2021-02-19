@@ -122,8 +122,11 @@
 
 .unbookmark {
   background-image: url("https://static.thenounproject.com/png/50608-200.png");
+  filter: invert(52%) sepia(91%) saturate(1953%) hue-rotate(188deg)
+    brightness(96%) contrast(110%);
 }
 
 .unbookmark:hover {
   background-color: rgb(184, 221, 255);
+  filter: invert(0%);
 }

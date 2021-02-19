@@ -16,7 +16,11 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact render={() => <Logged user={user}></Logged>} />
+        <Route
+          path="/"
+          exact
+          render={() => <Logged user={user} setUser={setUser}></Logged>}
+        />
         <Route
           path="/Signup"
           render={() => <Signup setUser={setUser}></Signup>}
