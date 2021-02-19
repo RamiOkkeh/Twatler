@@ -1,27 +1,9 @@
 import "./Tweet.css";
 
 function Tweet({ tweet }) {
-  var profile = 0,
-    userName = "rami",
-    nickName = "rami",
-    created = "Jan 13",
-    content = "asdfg",
-    media = "",
-    replies = [{ id: 1872 }],
-    hearts = 20,
-    booked = true;
-  var {
-    profile,
-    userName,
-    nickName,
-    created,
-    content,
-    media,
-    replies,
-    replyTo,
-    hearts,
-  } = tweet;
-
+  var booked = true;
+  let { user, created, content, media, replies, replyTo, hearts } = tweet;
+  let { userName, nickName, profile } = user;
   return (
     <div className="tweetCon">
       <div
@@ -34,9 +16,12 @@ function Tweet({ tweet }) {
       ></div>
       <div className="contentCon">
         <div className="usernameCon">
-          <span className="name">{userName}</span>
-          <span className="grey">@{nickName}</span>
+          <span className="name">{nickName}</span>
+          <span className="grey">@{userName}</span>
           <span className="grey">{new Date(created).toLocaleDateString()}</span>
+          <span className={replyTo ? "repling" : "hide"}>
+            {replyTo ? `replying to @${replyTo["user"]["userName"]}` : ""}
+          </span>
         </div>
         <div className="contentDiv">
           <div className="tweet">{content}</div>

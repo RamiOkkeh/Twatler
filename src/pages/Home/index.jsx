@@ -18,8 +18,6 @@ function Home({ user, tweets, setTweets }) {
       },
       body: JSON.stringify({
         userName: user.userName,
-        nickName: user.nickName,
-        profile: user.profile,
         content: $("#tweetBox").val(),
         created: new Date().valueOf(),
         media: media,
