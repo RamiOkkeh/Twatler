@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Tweet.css";
 
-function Tweet({ tweet, setUser }) {
+function Tweet({ tweet, setUser, update }) {
+  update = update ? update : () => {};
   let [tweeet, setTweet] = useState(tweet);
   let { user, created, content, media, replies, replyTo, hearts } = tweeet;
   let { userName, nickName, profile } = user;
@@ -67,7 +69,7 @@ function Tweet({ tweet, setUser }) {
           <span className="grey">@{userName}</span>
           <span className="grey">{new Date(created).toLocaleDateString()}</span>
           <span className={replyTo ? "repling" : "hide"}>
-            {replyTo ? `replying to @${replyTo["user"]["userName"]}` : ""}
+            {replyTo ? `replying to @${replyTo["userName"]}` : ""}
           </span>
         </div>
         <div className="contentDiv">
@@ -79,7 +81,15 @@ function Tweet({ tweet, setUser }) {
           )}
           <div className="reactionsCon">
             <div className="flex">
-              <div className="reply"></div>
+              <Link
+                to={{
+                  pathname: "/Comments",
+                  state: { tweet: tweeet },
+                }}
+                onClick={() => update(tweeet, setUser)}
+              >
+                <div className="reply"></div>
+              </Link>
               <div>{replies.length}</div>
             </div>
             <div className="flex">

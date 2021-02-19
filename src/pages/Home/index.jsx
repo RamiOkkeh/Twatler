@@ -27,11 +27,11 @@ function Home({ user, setUser, tweets, setTweets }) {
     };
     fetch("http://localhost:8000/tweet", options)
       .then((res) => res.json())
-      .then((tweet) => {
-        console.log(tweet);
+      .then((res) => {
+        console.log(res);
         setTweets((twets) => {
-          twets.push(tweet);
-          return tweets;
+          twets.push(res);
+          return twets;
         });
         setMedia("");
         $("#tweetBox").val("");

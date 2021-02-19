@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Nav from "../../components/Nav";
 import Home from "../Home";
@@ -59,7 +54,7 @@ function Logged({ user, setUser }) {
           render={() => <Bookmarks user={user} setUser={setUser} />}
         />
         <Route path="/Profile" render={() => <Profile user={user} />} />
-        <Route path="/Comments" component={Comments} />
+        <Route path="/Comments" strict component={Comments} />
         {/* <Route path="/Signup" component={Signup} />
         <Route path="/Signin" component={Signin} /> */}
       </Switch>
