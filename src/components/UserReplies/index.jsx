@@ -8,12 +8,9 @@ function UserReplies({ tweets }) {
   console.log(tweets);
   return (
     <div>
-      {tweets
-        .slice(0)
-        .reverse()
-        .map((tweet, i) => (
-          <Tweet key={i} tweet={tweet} />
-        ))}
+      {tweets.reverse().map((tweet, i) => (
+        <Tweet key={i} tweet={tweet} />
+      ))}
     </div>
   );
 }

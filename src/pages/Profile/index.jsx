@@ -10,19 +10,6 @@ function Profile({ user1, setUser1 }) {
   let { state, pathname } = useLocation();
   let [user, setUser] = useState(user1);
 
-  if (state && state.userName !== user.userName) {
-    fetch("http://localhost:8000/users", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userName: state.userName }),
-    })
-      .then((res) => res.json())
-      .then((userr) => setUser(userr[0]));
-  }
-
   let {
     nickName,
     userName,
@@ -42,24 +29,49 @@ function Profile({ user1, setUser1 }) {
       : session["following"].includes(userName)
       ? true
       : false;
-  let [tweeets, setTweets] = useState([]);
-  useEffect(() => {
-    let options = {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        tweets: tweets,
-      }),
-    };
-    fetch("http://localhost:8000/tweets", options)
-      .then((res) => res.json())
-      .then((res) => {
-        setTweets(res);
-      });
-  });
+
+  let [tweeets, setTweets] = useState([]),
+    [done, setDone] = useState(false),
+    stop = 0;
+  let loadTweets = () => {
+    if (done) return;
+    if (state && state.userName !== user.userName) {
+      fetch("http://localhost:8000/users", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName: state.userName }),
+      })
+        .then((res) => res.json())
+        .then((userr) => {
+          setUser(userr[0]);
+        });
+      setTimeout(loadTweets, 500);
+    } else {
+      while (stop++ < 10000) {
+        clearTimeout(stop);
+      }
+      let options = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tweets: tweets,
+        }),
+      };
+      fetch("http://localhost:8000/tweets", options)
+        .then((res) => res.json())
+        .then((res) => {
+          setTweets(res);
+          setDone(true);
+        });
+    }
+  };
+  useEffect(loadTweets, [tweeets, user, done]);
 
   const setUpProfile = () => {};
 
@@ -79,7 +91,6 @@ function Profile({ user1, setUser1 }) {
     fetch("http://localhost:8000/follow", options)
       .then((res) => res.json())
       .then((userr) => {
-        console.log(user);
         setUser(userr.user);
         setUser1(userr.user1);
         sessionStorage.setItem("user", JSON.stringify(userr.user1));

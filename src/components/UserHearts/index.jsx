@@ -24,12 +24,9 @@ function UserHearts({ hearts }) {
   }, []);
   return (
     <div>
-      {tweets
-        .slice(0)
-        .reverse()
-        .map((tweet, i) => (
-          <Tweet key={i} tweet={tweet} />
-        ))}
+      {tweets.reverse().map((tweet, i) => (
+        <Tweet key={i} tweet={tweet} />
+      ))}
     </div>
   );
 }
