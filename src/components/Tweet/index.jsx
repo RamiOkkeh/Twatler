@@ -19,7 +19,7 @@ function Tweet({ tweet, setUser, update }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: userName,
+        userName: session["userName"],
         _id: tweeet._id.$oid,
         hearted: hearted,
       }),
@@ -27,7 +27,10 @@ function Tweet({ tweet, setUser, update }) {
     fetch("http://localhost:8000/tweet/heart", options)
       .then((res) => res.json())
       .then((twet) => {
-        setTweet(twet);
+        setTweet((tw) => {
+          twet.media = tw.media;
+          return twet;
+        });
         setUser((userr) => {
           let index = userr.hearts.indexOf(twet._id);
           index === -1
