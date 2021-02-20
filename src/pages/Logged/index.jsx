@@ -6,6 +6,7 @@ import Explore from "../Explore";
 import Bookmarks from "../Bookmarks";
 import Profile from "../Profile";
 import Comments from "../Comments";
+import DisplayUsers from "../DisplayUsers";
 // import Signup from "../Signup";
 // import Signin from "../Signin";
 
@@ -58,6 +59,7 @@ function Logged({ user, setUser }) {
           render={() => <Profile user1={user} setUser1={setUser} />}
         />
         <Route path="/Comments" strict component={Comments} />
+        <Route path="/DisplayUsers" strict component={DisplayUsers} />
         {/* <Route path="/Signup" component={Signup} />
         <Route path="/Signin" component={Signin} /> */}
       </Switch>

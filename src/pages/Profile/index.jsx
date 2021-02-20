@@ -20,13 +20,10 @@ function Profile({ user1, setUser1 }) {
       body: JSON.stringify({ userName: state.userName }),
     })
       .then((res) => res.json())
-      .then((userr) => {
-        setUser(userr);
-      });
+      .then((userr) => setUser(userr[0]));
   }
 
   let {
-    _id,
     nickName,
     userName,
     cover,
@@ -134,8 +131,16 @@ function Profile({ user1, setUser1 }) {
             Joined {new Date(join).toLocaleDateString()}
           </div>
           <div className="following">
-            <Link to="home">{following.length} Following</Link>
-            <Link to="">{followers.length} Followers</Link>
+            <Link
+              to={{ pathname: "/DisplayUsers", state: { users: following } }}
+            >
+              {following.length} Following
+            </Link>
+            <Link
+              to={{ pathname: "/DisplayUsers", state: { users: followers } }}
+            >
+              {followers.length} Followers
+            </Link>
           </div>
         </div>
       </div>

@@ -25,9 +25,8 @@ function App() {
         })
           .then((res) => res.json())
           .then((user) => {
-            console.log(user);
-            setUser(user);
-            sessionStorage.setItem("user", JSON.stringify(user));
+            setUser(user[0]);
+            sessionStorage.setItem("user", JSON.stringify(user[0]));
           });
       }
     }, 60000);
