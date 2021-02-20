@@ -5,13 +5,31 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logged from "./pages/Logged";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
 function App() {
   let [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+  useEffect(() => {
+    setInterval(() => {
+      fetch("http://localhost:8000/users", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName: user.userName }),
+      })
+        .then((res) => res.json())
+        .then((user) => {
+          console.log(user);
+          setUser(user);
+          sessionStorage.setItem("user", JSON.stringify(user));
+        });
+    }, 60000);
+  }, []);
 
   return (
     <Router>
