@@ -28,6 +28,13 @@ function Tweet({ tweet, setUser, update }) {
       .then((res) => res.json())
       .then((twet) => {
         setTweet(twet);
+        setUser((userr) => {
+          let index = userr.hearts.indexOf(twet._id);
+          index === -1
+            ? userr.hearts.push(twet._id)
+            : userr.hearts.splice(index, 1);
+          return userr;
+        });
       });
   };
 

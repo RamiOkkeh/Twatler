@@ -1,19 +1,10 @@
 import "./Profile.css";
 import { Switch, Route, Link, useLocation } from "react-router-dom";
-import Tweet from "../../components/Tweet";
-
-function Test() {
-  return <div>main</div>;
-}
-function Test1() {
-  return <div>askld</div>;
-}
-function Test2() {
-  return <div>dsvfrevf</div>;
-}
-function Test3() {
-  return <div>serfdr</div>;
-}
+import { useState, useEffect } from "react";
+import UserTweets from "../../components/UserTweets";
+import UserReplies from "../../components/UserReplies";
+import UserMedia from "../../components/UserMedia";
+import UserHearts from "../../components/UserHearts";
 
 function Profile({ user }) {
   const loc = useLocation().pathname;
@@ -27,6 +18,7 @@ function Profile({ user }) {
     join,
     following,
     followers,
+    hearts,
   } = user;
   let session = JSON.parse(sessionStorage.getItem("user")),
     followStatus =
@@ -35,6 +27,27 @@ function Profile({ user }) {
         : session["following"].includes(id["$oid"])
         ? true
         : false;
+
+  let [tweeets, setTweets] = useState([]);
+  useEffect(() => {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tweets: tweets,
+      }),
+    };
+    console.log(tweeets);
+    fetch("http://localhost:8000/tweets", options)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setTweets(res);
+      });
+  }, []);
   return (
     <div className="homeCon">
       <div className="profileTitle">
@@ -107,10 +120,23 @@ function Profile({ user }) {
       </div>
       <div>
         <Switch>
-          <Route path="/Profile" exact component={Test} />
-          <Route path="/Profile/Replies" component={Test1} />
-          <Route path="/Profile/Media" component={Test2} />
-          <Route path="/Profile/Likes" component={Test3} />
+          <Route
+            path="/Profile"
+            exact
+            render={() => <UserTweets tweets={tweeets} />}
+          />
+          <Route
+            path="/Profile/Replies"
+            render={() => <UserReplies tweets={tweeets} />}
+          />
+          <Route
+            path="/Profile/Media"
+            render={() => <UserMedia tweets={tweeets} />}
+          />
+          <Route
+            path="/Profile/Likes"
+            render={() => <UserHearts hearts={hearts} />}
+          />
         </Switch>
       </div>
     </div>
