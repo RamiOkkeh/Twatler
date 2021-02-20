@@ -14,20 +14,22 @@ function App() {
   let [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   useEffect(() => {
     setInterval(() => {
-      fetch("http://localhost:8000/users", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName: user.userName }),
-      })
-        .then((res) => res.json())
-        .then((user) => {
-          console.log(user);
-          setUser(user);
-          sessionStorage.setItem("user", JSON.stringify(user));
-        });
+      if (user) {
+        fetch("http://localhost:8000/users", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userName: user.userName }),
+        })
+          .then((res) => res.json())
+          .then((user) => {
+            console.log(user);
+            setUser(user);
+            sessionStorage.setItem("user", JSON.stringify(user));
+          });
+      }
     }, 60000);
   }, []);
 

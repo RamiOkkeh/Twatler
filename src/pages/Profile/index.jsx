@@ -1,15 +1,32 @@
 import "./Profile.css";
-import { Switch, Route, Link, useLocation } from "react-router-dom";
+import { Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UserTweets from "../../components/UserTweets";
 import UserReplies from "../../components/UserReplies";
 import UserMedia from "../../components/UserMedia";
 import UserHearts from "../../components/UserHearts";
 
-function Profile({ user }) {
-  const loc = useLocation().pathname;
+function Profile({ user1, setUser1 }) {
+  let { state, pathname } = useLocation();
+  let [user, setUser] = useState(user1);
+
+  if (state && state.userName !== user.userName) {
+    fetch("http://localhost:8000/users", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName: state.userName }),
+    })
+      .then((res) => res.json())
+      .then((userr) => {
+        setUser(userr);
+      });
+  }
+
   let {
-    id,
+    _id,
     nickName,
     userName,
     cover,
@@ -20,14 +37,14 @@ function Profile({ user }) {
     followers,
     hearts,
   } = user;
-  let session = JSON.parse(sessionStorage.getItem("user")),
-    followStatus =
-      session["userName"] === userName
-        ? "self"
-        : session["following"].includes(id["$oid"])
-        ? true
-        : false;
 
+  let session = JSON.parse(sessionStorage.getItem("user"));
+  let followStatus =
+    session["userName"] === userName
+      ? "self"
+      : session["following"].includes(userName)
+      ? true
+      : false;
   let [tweeets, setTweets] = useState([]);
   useEffect(() => {
     let options = {
@@ -40,14 +57,38 @@ function Profile({ user }) {
         tweets: tweets,
       }),
     };
-    console.log(tweeets);
     fetch("http://localhost:8000/tweets", options)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setTweets(res);
       });
-  }, []);
+  });
+
+  const setUpProfile = () => {};
+
+  const follow = () => {
+    let options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        myUserName: user1.userName,
+        targetUserName: userName,
+        followStatus: followStatus,
+      }),
+    };
+    fetch("http://localhost:8000/follow", options)
+      .then((res) => res.json())
+      .then((userr) => {
+        console.log(user);
+        setUser(userr.user);
+        setUser1(userr.user1);
+        sessionStorage.setItem("user", JSON.stringify(userr.user1));
+      });
+  };
+
   return (
     <div className="homeCon">
       <div className="profileTitle">
@@ -76,7 +117,10 @@ function Profile({ user }) {
                   : `url("https://static.thenounproject.com/png/630740-200.png")`,
               }}
             ></div>
-            <button className="follow">
+            <button
+              className="follow"
+              onClick={followStatus === "self" ? setUpProfile : follow}
+            >
               {followStatus === "self"
                 ? "Set up profile"
                 : followStatus
@@ -96,24 +140,27 @@ function Profile({ user }) {
         </div>
       </div>
       <div className="taps">
-        <Link to="/Profile" className={loc === "/Profile" ? "selected" : ""}>
+        <Link
+          to="/Profile"
+          className={pathname === "/Profile" ? "selected" : ""}
+        >
           Tweets
         </Link>
         <Link
           to="/Profile/Replies"
-          className={loc === "/Profile/Replies" ? "selected" : ""}
+          className={pathname === "/Profile/Replies" ? "selected" : ""}
         >
           Replies
         </Link>
         <Link
           to="/Profile/Media"
-          className={loc === "/Profile/Media" ? "selected" : ""}
+          className={pathname === "/Profile/Media" ? "selected" : ""}
         >
           Media
         </Link>
         <Link
           to="/Profile/Likes"
-          className={loc === "/Profile/Likes" ? "selected" : ""}
+          className={pathname === "/Profile/Likes" ? "selected" : ""}
         >
           Likes
         </Link>

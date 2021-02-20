@@ -62,22 +62,45 @@ function Tweet({ tweet, setUser, update }) {
 
   return (
     <div className="tweetCon">
-      <div
-        className="userPic"
-        style={{
-          backgroundImage: profile
-            ? `url("${profile}")`
-            : "url('https://static.thenounproject.com/png/630740-200.png')",
+      <Link
+        to={{
+          pathname: "/Profile",
+          state: { userName: userName },
         }}
-      ></div>
+      >
+        <div
+          className="userPic"
+          style={{
+            backgroundImage: profile
+              ? `url("${profile}")`
+              : "url('https://static.thenounproject.com/png/630740-200.png')",
+          }}
+        ></div>
+      </Link>
       <div className="contentCon">
         <div className="usernameCon">
-          <span className="name">{nickName}</span>
-          <span className="grey">@{userName}</span>
+          <Link
+            to={{
+              pathname: "/Profile",
+              state: { userName: userName },
+            }}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <span className="name">{nickName}</span>
+            <span className="grey">@{userName}</span>
+          </Link>
           <span className="grey">{new Date(created).toLocaleDateString()}</span>
-          <span className={replyTo ? "repling" : "hide"}>
-            {replyTo ? `replying to @${replyTo["userName"]}` : ""}
-          </span>
+          <Link
+            to={{
+              pathname: "/Profile",
+              state: { userName: replyTo["userName"] },
+            }}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <span className={replyTo ? "repling" : "hide"}>
+              {replyTo ? `replying to @${replyTo["userName"]}` : ""}
+            </span>
+          </Link>
         </div>
         <div className="contentDiv">
           <div className="tweet">{content}</div>

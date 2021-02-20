@@ -53,7 +53,10 @@ function Logged({ user, setUser }) {
           path="/Bookmarks"
           render={() => <Bookmarks user={user} setUser={setUser} />}
         />
-        <Route path="/Profile" render={() => <Profile user={user} />} />
+        <Route
+          path="/Profile"
+          render={() => <Profile user1={user} setUser1={setUser} />}
+        />
         <Route path="/Comments" strict component={Comments} />
         {/* <Route path="/Signup" component={Signup} />
         <Route path="/Signin" component={Signin} /> */}
