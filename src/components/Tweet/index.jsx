@@ -39,6 +39,7 @@ function Tweet({ tweet, setUser, update }) {
   };
 
   const book = () => {
+    console.log(tweeet._id.$oid);
     let options = {
       method: "POST",
       mode: "cors",
@@ -46,7 +47,7 @@ function Tweet({ tweet, setUser, update }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userName: userName,
+        userName: session["userName"],
         _id: tweeet._id.$oid,
         booked: booked,
       }),
