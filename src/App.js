@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     setInterval(() => {
       if (user) {
-        fetch("http://localhost:8000/users", {
+        fetch("/users", {
           method: "POST",
           mode: "cors",
           headers: {

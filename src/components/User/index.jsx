@@ -2,7 +2,7 @@ import "./User.css";
 import { Link } from "react-router-dom";
 
 function User({ user }) {
-  let { userName, nickName, profile, join, followers } = user;
+  let { userName, nickName, profile, join } = user;
   return (
     <div className="userCon alignCenter">
       <Link

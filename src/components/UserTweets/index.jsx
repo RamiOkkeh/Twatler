@@ -1,5 +1,4 @@
 import Tweet from "../Tweet";
-import { useEffect, useState } from "react";
 
 function UserTweets({ tweets }) {
   return (
