@@ -6,7 +6,7 @@ function Signin({ setUser }) {
     e.preventDefault();
     let [email, pass] = $("input").serializeArray();
     console.log(email, pass);
-    fetch("http://localhost:8000/signin", {
+    fetch("/signin", {
       method: "POST",
       mode: "cors",
       headers: {

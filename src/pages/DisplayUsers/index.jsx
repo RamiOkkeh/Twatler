@@ -17,7 +17,7 @@ function DisplayUsers() {
         userName: users,
       }),
     };
-    fetch("http://localhost:8000/users", options)
+    fetch("/users", options)
       .then((res) => res.json())
       .then((userss) => {
         console.log(userss);

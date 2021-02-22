@@ -6,7 +6,7 @@ function Signup({ setUser }) {
   const submit = (e) => {
     e.preventDefault();
     let [userName, nickName, email, pass] = $("input").serializeArray();
-    fetch("http://localhost:8000/signup", {
+    fetch("/signup", {
       method: "POST",
       mode: "cors",
       headers: {

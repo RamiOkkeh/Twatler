@@ -14,7 +14,7 @@ function Bookmarks({ user, setUser }) {
         tweets: user["bookmarks"],
       }),
     };
-    fetch("http://localhost:8000/bookmarks", options)
+    fetch("/bookmarks", options)
       .then((res) => res.json())
       .then((twets) => {
         setTweets(twets);

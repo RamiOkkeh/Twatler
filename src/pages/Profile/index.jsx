@@ -36,7 +36,7 @@ function Profile({ user1, setUser1 }) {
   let loadTweets = () => {
     if (done) return;
     if (state && state.userName !== user.userName) {
-      fetch("http://localhost:8000/users", {
+      fetch("/users", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -63,7 +63,7 @@ function Profile({ user1, setUser1 }) {
           tweets: tweets,
         }),
       };
-      fetch("http://localhost:8000/tweets", options)
+      fetch("/tweets", options)
         .then((res) => res.json())
         .then((res) => {
           setTweets(res);
@@ -88,7 +88,7 @@ function Profile({ user1, setUser1 }) {
         followStatus: followStatus,
       }),
     };
-    fetch("http://localhost:8000/follow", options)
+    fetch("/follow", options)
       .then((res) => res.json())
       .then((userr) => {
         setUser(userr.user);

@@ -35,7 +35,7 @@ class Comments extends Component {
         visibility: true,
       }),
     };
-    fetch("http://localhost:8000/tweet", options)
+    fetch("/tweet", options)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);

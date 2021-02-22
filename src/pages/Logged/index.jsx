@@ -13,7 +13,7 @@ import DisplayUsers from "../DisplayUsers";
 function Logged({ user, setUser }) {
   let [tweets, setTweets] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/tweet")
+    fetch("/tweet")
       .then((res) => res.json())
       .then((twets) => setTweets(twets));
   }, []);

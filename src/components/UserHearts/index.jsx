@@ -15,7 +15,7 @@ function UserHearts({ hearts }) {
       }),
     };
     console.log(tweets);
-    fetch("http://localhost:8000/tweets", options)
+    fetch("/tweets", options)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);

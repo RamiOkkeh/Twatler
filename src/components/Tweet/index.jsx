@@ -24,7 +24,7 @@ function Tweet({ tweet, setUser, update }) {
         hearted: hearted,
       }),
     };
-    fetch("http://localhost:8000/tweet/heart", options)
+    fetch("/tweet/heart", options)
       .then((res) => res.json())
       .then((twet) => {
         setTweet((tw) => {
@@ -55,7 +55,7 @@ function Tweet({ tweet, setUser, update }) {
         booked: booked,
       }),
     };
-    fetch("http://localhost:8000/tweet/book", options)
+    fetch("/tweet/book", options)
       .then((res) => res.json())
       .then((user) => {
         console.log(user);
